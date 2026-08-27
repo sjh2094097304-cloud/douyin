@@ -1,0 +1,57 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <uses-permission
+            android:name="android.permission.FOREGROUND_SERVICE" />
+        <uses-permission
+            android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+        <package android:name="com.ss.android.ugc.aweme" />
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:label="Douyin Liquid Glass"
+        android:icon="@mipmap/ic_launcher">
+
+        <service
+            android:name=".capture.ScreenCaptureService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
+
+        <!-- 设置页：移除桌面入口，收紧导出权限 -->
+        <activity
+            android:name=".status.ModuleStatusActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LiquidSettings" />
+
+        <!-- 配置Provider：关闭导出，同进程内访问 -->
+        <provider
+            android:name=".settings.ModuleSettingsProvider"
+            android:authorities="com.autumn.douyin.liquidglass.settings"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.autumn.douyin.liquidglass.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/diagnostic_file_paths" />
+        </provider>
+
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Replace the Douyin native bottom bar with a liquid glass bar" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="82" />
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/xposed_scope" />
+    </application>
+
+</manifest>
