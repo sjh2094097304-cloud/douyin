@@ -1,10 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 所有权限声明放在这里（与 queries 同级） -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+
     <queries>
-        <uses-permission
-            android:name="android.permission.FOREGROUND_SERVICE" />
-        <uses-permission
-            android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+        <!-- 只允许 <package> 或 <intent> 等查询元素 -->
         <package android:name="com.ss.android.ugc.aweme" />
     </queries>
 
@@ -18,13 +19,11 @@
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
 
-        <!-- 设置页：移除桌面入口，收紧导出权限 -->
         <activity
             android:name=".status.ModuleStatusActivity"
             android:exported="false"
             android:theme="@style/Theme.LiquidSettings" />
 
-        <!-- 配置Provider：关闭导出，同进程内访问 -->
         <provider
             android:name=".settings.ModuleSettingsProvider"
             android:authorities="com.autumn.douyin.liquidglass.settings"
